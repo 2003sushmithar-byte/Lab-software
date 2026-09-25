@@ -1,40 +1,47 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { AuthContext } from "./AuthContext";
 import type { User } from "./authTypes";
+import {
+  getStoredUser,
+  setStoredUser,
+  getToken,
+  setToken,
+  clearAuth,
+  getMeApi,
+} from "../../services/api";
 
 interface AuthProviderProps {
   children: ReactNode;
 }
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [user, setUser] = useState<User | null>(() => {
-    const storedUser = localStorage.getItem("lab_user");
-
-    if (!storedUser) {
-      return null;
-    }
-
-    try {
-      return JSON.parse(storedUser);
-    } catch {
-      localStorage.removeItem("lab_user");
-      return null;
-    }
-  });
+  const [user, setUser] = useState<User | null>(() => getStoredUser());
 
   useEffect(() => {
-    if (user) {
-      localStorage.setItem("lab_user", JSON.stringify(user));
-    } else {
-      localStorage.removeItem("lab_user");
+    const token = getToken();
+    if (token) {
+      getMeApi(token)
+        .then((currentUser) => {
+          setUser(currentUser);
+          setStoredUser(currentUser);
+        })
+        .catch(() => {
+          clearAuth();
+          setUser(null);
+        });
     }
-  }, [user]);
+  }, []);
 
-  const login = (userData: User) => {
+  const login = (userData: User, token?: string) => {
+    if (token) {
+      setToken(token);
+    }
+    setStoredUser(userData);
     setUser(userData);
   };
 
   const logout = () => {
+    clearAuth();
     setUser(null);
   };
 

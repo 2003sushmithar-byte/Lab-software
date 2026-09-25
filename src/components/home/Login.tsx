@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -10,26 +10,36 @@ import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 import { useAuth } from "../auth/useAuth";
-import type { User } from "../auth/authTypes";
+import { loginApi } from "../../services/api";
 
 import "./login.css";
 
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { login } = useAuth();
-  const [email, setEmail] = useState("");
+
+  const locationState = location.state as { message?: string; email?: string } | null;
+  const [email, setEmail] = useState(() => locationState?.email || "");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [generalError, setGeneralError] = useState("");
+  const [successMessage, setSuccessMessage] = useState<string | null>(
+    () => locationState?.message || null
+  );
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     let isValid = true;
 
     setEmailError("");
     setPasswordError("");
+    setGeneralError("");
+    setSuccessMessage(null);
 
     if (!email.trim()) {
       setEmailError("Email address is required.");
@@ -45,54 +55,31 @@ const Login = () => {
       return;
     }
 
-    /*
-      TEMPORARY FRONTEND LOGIN
+    setIsSubmitting(true);
+    try {
+      const response = await loginApi({
+        email: email.trim(),
+        password,
+      });
 
-      Backend will later return:
+      login(response.user, response.accessToken);
+      navigate("/dashboard");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error
+          ? err.message
+          : "Authentication failed. Please check your credentials.";
 
-      {
-        userId,
-        labId,
-        labName,
-        name,
-        email,
-        role
+      if (errorMessage.toLowerCase().includes("email")) {
+        setEmailError(errorMessage);
+      } else if (errorMessage.toLowerCase().includes("password")) {
+        setPasswordError(errorMessage);
+      } else {
+        setGeneralError(errorMessage);
       }
-
-      Then simply call:
-
-      login(response.user)
-    */
-
-    const signupData = localStorage.getItem("lab_signup_data");
-
-    let storedSignupData: {
-      labName?: string;
-      name?: string;
-      email?: string;
-    } = {};
-
-    if (signupData) {
-      try {
-        storedSignupData = JSON.parse(signupData);
-      } catch {
-        storedSignupData = {};
-      }
+    } finally {
+      setIsSubmitting(false);
     }
-
-    const mockUser: User = {
-      userId: "USR-001",
-      labId: "LAB-001",
-      labName:
-        storedSignupData.labName || "Laboratory Management System",
-      name: storedSignupData.name || "Administrator",
-      email: email.trim(),
-      role: "admin",
-    };
-
-    login(mockUser);
-
-    navigate("/dashboard");
   };
 
   return (
@@ -339,11 +326,24 @@ const Login = () => {
 
               {/* Submit */}
 
+              {successMessage && (
+                <div style={{ textAlign: "center", color: "#16a34a", fontSize: "12px", fontWeight: 500 }}>
+                  {successMessage}
+                </div>
+              )}
+
+              {generalError && (
+                <p className="login-field-error" style={{ textAlign: "center", marginTop: 0 }}>
+                  {generalError}
+                </p>
+              )}
+
               <button
                 type="submit"
                 className="login-submit"
+                disabled={isSubmitting}
               >
-                <span>Sign In</span>
+                <span>{isSubmitting ? "Signing In..." : "Sign In"}</span>
                 <ArrowForwardIcon className="login-submit-arrow" />
               </button>
 

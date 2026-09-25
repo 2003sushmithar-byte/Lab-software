@@ -11,6 +11,7 @@ import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import "./signup.css";
 import LegalModal, { type LegalTab } from "../../common components/LegalModal";
+import { signupApi } from "../../services/api";
 
 interface FormData {
   labName: string;
@@ -53,6 +54,8 @@ const Signup = () => {
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   const [showLegalModal, setShowLegalModal] = useState(false);
   const [activeLegalTab, setActiveLegalTab] = useState<LegalTab>("terms");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [generalError, setGeneralError] = useState("");
 
   const handleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -121,20 +124,52 @@ const Signup = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-  event.preventDefault();
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setGeneralError("");
 
-  if (!validate()) {
-    return;
-  }
+    if (!validate()) {
+      return;
+    }
 
-  localStorage.setItem(
-    "lab_signup_data",
-    JSON.stringify(formData)
-  );
+    setIsSubmitting(true);
+    try {
+      await signupApi({
+        labName: formData.labName.trim(),
+        adminName: formData.adminName.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim(),
+        address: formData.address.trim(),
+        password: formData.password,
+      });
 
-  navigate("/login");
-};
+      navigate("/login", {
+        state: {
+          message: "Laboratory account created successfully! Please sign in.",
+          email: formData.email.trim(),
+        },
+      });
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error
+          ? err.message
+          : "Failed to create laboratory account. Please try again.";
+
+      if (
+        errorMessage.toLowerCase().includes("email") ||
+        errorMessage.toLowerCase().includes("registered")
+      ) {
+        setErrors((previous) => ({
+          ...previous,
+          email: errorMessage,
+        }));
+      } else {
+        setGeneralError(errorMessage);
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const openLegalModal = (tab: LegalTab) => {
     setActiveLegalTab(tab);
@@ -588,8 +623,22 @@ const Signup = () => {
                 )}
               </div>
 
-              <button type="submit" className="signup-submit">
-                <span>Create Laboratory Account</span>
+              {generalError && (
+                <p className="field-error terms-error" style={{ textAlign: "center", marginBottom: "1rem" }}>
+                  {generalError}
+                </p>
+              )}
+
+              <button
+                type="submit"
+                className="signup-submit"
+                disabled={isSubmitting}
+              >
+                <span>
+                  {isSubmitting
+                    ? "Creating Account..."
+                    : "Create Laboratory Account"}
+                </span>
                 <span className="submit-arrow">→</span>
               </button>
             </form>
