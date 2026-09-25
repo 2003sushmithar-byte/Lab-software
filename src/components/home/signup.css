@@ -1,0 +1,425 @@
+@reference "../../index.css";
+
+/* =========================================
+   SIGNUP PAGE
+========================================= */
+
+.signup-page {
+  @apply min-h-screen;
+  background: #f1f5f9;
+}
+
+.signup-layout {
+  @apply min-h-screen grid grid-cols-1;
+  grid-template-columns: 42% 58%;
+}
+
+/* =========================================
+   LEFT BRANDING PANEL
+========================================= */
+
+.signup-brand-panel {
+  @apply hidden lg:flex relative overflow-hidden bg-slate-900 text-white;
+}
+
+.signup-brand-panel::before {
+  content: "";
+  position: absolute;
+  top: -8rem;
+  left: -8rem;
+  width: 24rem;
+  height: 24rem;
+  border-radius: 9999px;
+  background: rgb(59 130 246 / 10%);
+}
+
+.signup-brand-panel::after {
+  content: "";
+  position: absolute;
+  right: -8rem;
+  bottom: -10rem;
+  width: 32rem;
+  height: 32rem;
+  border-radius: 9999px;
+  background: rgb(34 211 238 / 10%);
+}
+
+.brand-content {
+  @apply relative z-10 flex min-h-screen w-full flex-col px-12 py-10;
+}
+
+.brand-logo {
+  @apply flex items-center gap-3;
+}
+
+.brand-logo-icon {
+  @apply flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500 shadow-lg;
+  box-shadow: 0 10px 25px rgb(59 130 246 / 20%);
+}
+
+.brand-logo-icon svg {
+  font-size: 1.5rem;
+}
+
+.brand-logo h1 {
+  @apply text-xl font-bold tracking-tight;
+}
+
+.brand-logo span {
+  @apply mt-0.5 block text-xs text-slate-400;
+}
+
+.brand-main-content {
+  @apply flex flex-1 max-w-xl flex-col justify-center;
+}
+
+.brand-badge {
+  @apply mb-7 inline-flex w-fit items-center gap-2 rounded-full px-3 py-2 text-xs font-medium text-blue-300;
+  background: rgb(255 255 255 / 5%);
+  border: 1px solid rgb(255 255 255 / 10%);
+}
+
+.brand-badge svg {
+  font-size: 1rem;
+}
+
+.brand-main-content h2 {
+  @apply text-4xl font-bold tracking-tight text-white xl:text-5xl;
+  line-height: 1.12;
+}
+
+.brand-main-content h2 span {
+  @apply block text-blue-400;
+}
+
+.brand-main-content > p {
+  @apply mt-6 max-w-lg text-base leading-7 text-slate-400 xl:text-lg;
+}
+
+.brand-features {
+  @apply mt-10 space-y-5;
+}
+
+.brand-feature {
+  @apply flex items-start gap-4;
+}
+
+.feature-icon {
+  @apply flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg text-blue-400;
+  background: rgb(255 255 255 / 5%);
+  border: 1px solid rgb(255 255 255 / 10%);
+}
+
+.feature-icon svg {
+  font-size: 1.25rem;
+}
+
+.brand-feature strong {
+  @apply block text-sm font-semibold text-slate-200;
+}
+
+.brand-feature span {
+  @apply mt-1 block text-xs leading-5 text-slate-500;
+}
+
+.brand-footer {
+  @apply text-xs text-slate-600;
+}
+
+/* =========================================
+   FORM SECTION
+========================================= */
+
+.signup-form-section {
+  @apply min-h-screen overflow-y-auto bg-white;
+}
+
+.signup-form-wrapper {
+  @apply mx-auto w-full max-w-3xl px-6 py-10;
+}
+
+.signup-heading {
+  @apply mb-8;
+}
+
+.signup-eyebrow {
+  @apply text-xs font-bold text-blue-600;
+  letter-spacing: 0.18em;
+}
+
+.signup-heading h2 {
+  @apply mt-2 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl;
+}
+
+.signup-heading p {
+  @apply mt-2 text-sm leading-6 text-slate-500;
+}
+
+/* =========================================
+   MOBILE BRAND
+========================================= */
+
+.mobile-brand {
+  @apply mb-10 flex items-center gap-3 lg:hidden;
+}
+
+.mobile-brand-icon {
+  @apply flex h-11 w-11 items-center justify-center rounded-xl bg-blue-600 text-white;
+}
+
+.mobile-brand strong {
+  @apply block text-lg font-bold text-slate-900;
+}
+
+.mobile-brand span {
+  @apply mt-0.5 block text-slate-500;
+  font-size: 11px;
+}
+
+/* =========================================
+   FORM SECTIONS
+========================================= */
+
+.signup-form {
+  @apply space-y-8;
+}
+
+.form-section {
+  @apply rounded-2xl border border-slate-200 p-5 sm:p-6;
+  background: rgb(248 250 252 / 60%);
+}
+
+.form-section-heading {
+  @apply flex items-start gap-3 border-b border-slate-200 pb-5;
+}
+
+.section-number {
+  @apply flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-blue-600 text-xs font-bold text-white;
+}
+
+.form-section-heading h3 {
+  @apply text-sm font-bold text-slate-900;
+}
+
+.form-section-heading p {
+  @apply mt-1 text-xs text-slate-500;
+}
+
+.form-grid {
+  @apply grid grid-cols-1 gap-x-5 gap-y-5 pt-5 sm:grid-cols-2;
+}
+
+.form-field {
+  @apply min-w-0;
+}
+
+.full-width {
+  @apply sm:col-span-2;
+}
+
+.form-field label {
+  @apply mb-2 block text-xs font-semibold text-slate-700;
+}
+
+.form-field label span {
+  @apply ml-1 text-red-500;
+}
+
+/* =========================================
+   INPUTS
+========================================= */
+
+.input-wrapper {
+  @apply flex h-11 items-center gap-3 rounded-lg border border-slate-200 bg-white px-3 transition-all duration-200;
+}
+
+.input-wrapper:focus-within {
+  @apply border-blue-500;
+  box-shadow: 0 0 0 2px rgb(59 130 246 / 10%);
+}
+
+.input-wrapper > svg {
+  @apply flex-shrink-0 text-slate-400;
+  font-size: 19px;
+}
+
+.input-wrapper input {
+  @apply w-full min-w-0 border-0 bg-transparent text-sm text-slate-800 outline-none;
+}
+
+.input-wrapper input::placeholder {
+  @apply text-slate-400;
+}
+
+.textarea-wrapper {
+  @apply h-auto min-h-24 items-start py-3;
+}
+
+.textarea-wrapper textarea {
+  @apply w-full min-w-0 resize-none border-0 bg-transparent text-sm leading-5 text-slate-800 outline-none;
+}
+
+.textarea-wrapper textarea::placeholder {
+  @apply text-slate-400;
+}
+
+.input-error {
+  @apply border-red-400;
+  background: rgb(254 242 242 / 30%);
+}
+
+.input-error:focus-within {
+  @apply border-red-500;
+  box-shadow: 0 0 0 2px rgb(239 68 68 / 10%);
+}
+
+.field-error {
+  @apply mt-1.5 text-red-500;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.password-toggle {
+  @apply flex-shrink-0 cursor-pointer rounded border-0 bg-transparent p-1 text-slate-400 transition-colors hover:text-slate-600;
+}
+
+.password-toggle svg {
+  font-size: 18px;
+}
+
+/* =========================================
+   TERMS
+========================================= */
+
+.terms-container {
+  @apply -mt-2;
+}
+
+.terms-checkbox {
+  @apply flex cursor-pointer items-start gap-3;
+}
+
+.terms-checkbox input {
+  @apply sr-only;
+}
+
+.custom-checkbox {
+  @apply mt-0.5 flex h-4 w-4 flex-shrink-0 items-center justify-center rounded border border-slate-300 bg-white font-bold text-white transition-all;
+  font-size: 10px;
+}
+
+.terms-checkbox input:checked + .custom-checkbox {
+  @apply border-blue-600 bg-blue-600;
+}
+
+.terms-text {
+  @apply text-xs leading-5 text-slate-500;
+}
+
+.terms-link {
+  @apply cursor-pointer font-semibold text-blue-600 underline hover:text-blue-700;
+  text-underline-offset: 2px;
+}
+
+.terms-error {
+  @apply ml-7;
+}
+
+/* =========================================
+   SUBMIT
+========================================= */
+
+.signup-submit {
+  @apply flex h-12 w-full cursor-pointer items-center justify-center gap-3 rounded-xl bg-blue-600 text-sm font-semibold text-white transition-all duration-200;
+  box-shadow: 0 10px 25px rgb(37 99 235 / 20%);
+}
+
+.signup-submit:hover {
+  @apply bg-blue-700;
+  box-shadow: 0 15px 30px rgb(37 99 235 / 25%);
+}
+
+.signup-submit:active {
+  transform: scale(0.99);
+}
+
+.submit-arrow {
+  @apply text-lg transition-transform duration-200;
+}
+
+.signup-submit:hover .submit-arrow {
+  @apply translate-x-1;
+}
+
+/* =========================================
+   LOGIN
+========================================= */
+
+.login-link {
+  @apply mt-7 text-center text-xs text-slate-500;
+}
+
+.login-link a {
+  @apply ml-1.5 font-semibold text-blue-600 hover:text-blue-700;
+}
+
+.mobile-footer {
+  @apply mt-8 border-t border-slate-100 pt-6 text-center text-slate-400 lg:hidden;
+  font-size: 11px;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (min-width: 1280px) {
+  .brand-content {
+    @apply px-16;
+  }
+
+  .signup-form-wrapper {
+    @apply px-16;
+  }
+}
+
+@media (max-width: 1024px) {
+  .signup-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .signup-form-wrapper {
+    @apply px-4 py-7;
+  }
+
+  .signup-heading h2 {
+    @apply text-2xl;
+  }
+
+  .form-section {
+    @apply rounded-xl p-4;
+  }
+
+  .form-grid {
+    @apply gap-y-4;
+  }
+}
+
+@media (max-width: 380px) {
+  .signup-form-wrapper {
+    @apply px-3 py-6;
+  }
+
+  .signup-heading h2 {
+    @apply text-xl;
+  }
+
+  .form-section-heading {
+    @apply gap-2;
+  }
+
+  .section-number {
+    @apply h-8 w-8;
+  }
+}

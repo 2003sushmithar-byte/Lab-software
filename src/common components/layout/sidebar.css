@@ -1,0 +1,175 @@
+@reference "../../index.css";
+
+.app-sidebar {
+  @apply fixed left-0 top-0 z-50 flex h-screen w-[270px] flex-col bg-slate-950 text-white;
+}
+
+.sidebar-header {
+  @apply flex h-[76px] shrink-0 items-center justify-between border-b border-white/10 px-5;
+}
+
+.sidebar-brand {
+  @apply flex min-w-0 items-center gap-3;
+}
+
+.sidebar-brand-icon {
+  @apply flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-600;
+}
+
+.sidebar-brand-icon svg {
+  @apply text-xl;
+}
+
+.sidebar-brand-text {
+  @apply flex min-w-0 flex-col;
+}
+
+.sidebar-brand-text strong {
+  @apply text-sm font-bold text-white;
+}
+
+.sidebar-brand-text span {
+  @apply mt-0.5 text-[9px] text-slate-400;
+}
+
+.sidebar-close {
+  @apply hidden h-8 w-8 cursor-pointer items-center justify-center rounded-lg border-0 bg-transparent text-slate-400;
+}
+
+.sidebar-lab {
+  @apply mx-4 mt-4 flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-3 py-3;
+}
+
+.sidebar-lab-icon {
+  @apply flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-blue-500/15 text-blue-400;
+}
+
+.sidebar-lab-icon svg {
+  @apply text-lg;
+}
+
+.sidebar-lab-info {
+  @apply flex min-w-0 flex-col;
+}
+
+.sidebar-lab-info strong {
+  @apply truncate text-xs font-semibold text-white;
+}
+
+.sidebar-lab-info span {
+  @apply mt-1 text-[10px] text-slate-400;
+}
+
+.sidebar-navigation {
+  @apply flex-1 overflow-y-auto px-3 py-4;
+}
+
+.sidebar-navigation::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebar-navigation::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-slate-700;
+}
+
+.sidebar-nav-item {
+  @apply flex w-full items-center gap-3 rounded-xl border-0 bg-transparent px-3 py-2.5 text-left text-xs font-medium text-slate-400 transition-all;
+  min-height: 42px;
+}
+
+.sidebar-nav-item:hover {
+  @apply bg-white/5 text-white;
+}
+
+.sidebar-nav-active {
+  @apply bg-blue-600 text-white;
+}
+
+.sidebar-nav-icon {
+  @apply flex h-5 w-5 shrink-0 items-center justify-center;
+}
+
+.sidebar-nav-icon svg {
+  @apply text-[20px];
+}
+
+.sidebar-nav-label {
+  @apply min-w-0 flex-1 truncate;
+}
+
+.sidebar-menu-button {
+  @apply cursor-pointer;
+}
+
+.sidebar-menu-open {
+  @apply text-white;
+}
+
+.sidebar-expand-icon {
+  @apply shrink-0 text-lg text-slate-500 transition-transform;
+}
+
+.sidebar-expand-active {
+  @apply rotate-180 text-slate-300;
+}
+
+.sidebar-submenu {
+  @apply ml-5 border-l border-white/10 pl-4;
+}
+
+.sidebar-submenu-item {
+  @apply flex items-center gap-2 rounded-lg px-3 py-2 text-[11px] font-medium text-slate-500 transition-colors;
+}
+
+.sidebar-submenu-item:hover {
+  @apply text-white;
+}
+
+.sidebar-submenu-active {
+  @apply bg-blue-600/10 text-blue-400;
+}
+
+.sidebar-submenu-dot {
+  @apply h-1.5 w-1.5 shrink-0 rounded-full bg-slate-600;
+}
+
+.sidebar-submenu-active .sidebar-submenu-dot {
+  @apply bg-blue-400;
+}
+
+.sidebar-footer {
+  @apply flex shrink-0 items-center justify-between border-t border-white/10 px-5 py-4;
+}
+
+.sidebar-footer span {
+  @apply text-[9px] text-slate-500;
+}
+
+.sidebar-footer small {
+  @apply text-[9px] text-slate-600;
+}
+
+.sidebar-overlay {
+  @apply fixed inset-0 z-40 bg-black/40;
+}
+
+@media (max-width: 1024px) {
+  .app-sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+  }
+
+  .app-sidebar.sidebar-open {
+    transform: translateX(0);
+  }
+
+  .sidebar-close {
+    @apply flex;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-sidebar {
+    @apply w-[285px];
+  }
+}

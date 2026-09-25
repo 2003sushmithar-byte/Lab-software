@@ -1,0 +1,419 @@
+@reference "../../index.css";
+
+/* =========================================
+LOGIN PAGE
+========================================= */
+
+.login-page {
+@apply min-h-screen;
+background: #f1f5f9;
+}
+
+.login-layout {
+@apply grid min-h-screen grid-cols-1;
+grid-template-columns: 42% 58%;
+}
+
+/* =========================================
+LEFT BRAND PANEL
+========================================= */
+
+.login-brand-panel {
+@apply relative hidden overflow-hidden bg-slate-900 text-white lg:flex;
+}
+
+.login-brand-panel::before {
+content: "";
+
+position: absolute;
+
+top: -8rem;
+left: -8rem;
+
+width: 24rem;
+height: 24rem;
+
+border-radius: 9999px;
+
+background: rgb(59 130 246 / 10%);
+}
+
+.login-brand-panel::after {
+content: "";
+
+position: absolute;
+
+right: -8rem;
+bottom: -10rem;
+
+width: 32rem;
+height: 32rem;
+
+border-radius: 9999px;
+
+background: rgb(34 211 238 / 10%);
+}
+
+.login-brand-content {
+@apply relative z-10 flex min-h-screen w-full flex-col px-12 py-10;
+}
+
+.login-brand-logo {
+@apply flex items-center gap-3;
+}
+
+.login-brand-logo-icon {
+@apply flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500;
+box-shadow: 0 10px 25px rgb(59 130 246 / 20%);
+}
+
+.login-brand-logo-icon svg {
+@apply text-2xl;
+}
+
+.login-brand-logo h1 {
+@apply text-xl font-bold tracking-tight;
+}
+
+.login-brand-logo span {
+@apply mt-0.5 block text-xs text-slate-400;
+}
+
+/* =========================================
+BRAND CONTENT
+========================================= */
+
+.login-brand-main {
+@apply flex max-w-xl flex-1 flex-col justify-center;
+}
+
+.login-brand-badge {
+@apply mb-7 inline-flex w-fit items-center gap-2 rounded-full px-3 py-2 text-xs font-medium text-blue-300;
+background: rgb(255 255 255 / 5%);
+border: 1px solid rgb(255 255 255 / 10%);
+}
+
+.login-brand-badge svg {
+@apply text-base;
+}
+
+.login-brand-main h2 {
+@apply text-4xl font-bold tracking-tight text-white xl:text-5xl;
+line-height: 1.12;
+}
+
+.login-brand-main h2 span {
+@apply block text-blue-400;
+}
+
+.login-brand-main > p {
+@apply mt-6 max-w-lg text-base leading-7 text-slate-400 xl:text-lg;
+}
+
+.login-brand-features {
+@apply mt-10 space-y-5;
+}
+
+.login-brand-feature {
+@apply flex items-start gap-4;
+}
+
+.login-feature-icon {
+@apply flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-blue-400;
+background: rgb(255 255 255 / 5%);
+border: 1px solid rgb(255 255 255 / 10%);
+}
+
+.login-feature-icon svg {
+@apply text-xl;
+}
+
+.login-brand-feature strong {
+@apply block text-sm font-semibold text-slate-200;
+}
+
+.login-brand-feature span {
+@apply mt-1 block text-xs leading-5 text-slate-500;
+}
+
+.login-brand-footer {
+@apply text-xs text-slate-600;
+}
+
+/* =========================================
+FORM SECTION
+========================================= */
+
+.login-form-section {
+@apply min-h-screen overflow-y-auto bg-white;
+}
+
+.login-form-wrapper {
+@apply mx-auto flex min-h-screen w-full max-w-xl flex-col justify-center px-6 py-10;
+}
+
+/* =========================================
+MOBILE BRAND
+========================================= */
+
+.login-mobile-brand {
+@apply mb-10 flex items-center gap-3 lg:hidden;
+}
+
+.login-mobile-brand-icon {
+@apply flex h-11 w-11 items-center justify-center rounded-xl bg-blue-600 text-white;
+}
+
+.login-mobile-brand-icon svg {
+@apply text-xl;
+}
+
+.login-mobile-brand strong {
+@apply block text-lg font-bold text-slate-900;
+}
+
+.login-mobile-brand span {
+@apply mt-0.5 block text-slate-500;
+font-size: 11px;
+}
+
+/* =========================================
+HEADING
+========================================= */
+
+.login-heading {
+@apply mb-8;
+}
+
+.login-eyebrow {
+@apply text-xs font-bold tracking-widest text-blue-600;
+}
+
+.login-heading h2 {
+@apply mt-2 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl;
+}
+
+.login-heading p {
+@apply mt-2 max-w-lg text-sm leading-6 text-slate-500;
+}
+
+/* =========================================
+FORM
+========================================= */
+
+.login-form {
+@apply space-y-6;
+}
+
+.login-field {
+@apply min-w-0;
+}
+
+.login-field label {
+@apply mb-2 block text-xs font-semibold text-slate-700;
+}
+
+.login-field label span {
+@apply ml-1 text-red-500;
+}
+
+/* =========================================
+PASSWORD LABEL
+========================================= */
+
+.login-password-label {
+@apply mb-2 flex items-center justify-between gap-3;
+}
+
+.login-password-label label {
+@apply mb-0;
+}
+
+.login-password-label a {
+@apply text-xs font-semibold text-blue-600 transition-colors hover:text-blue-700;
+}
+
+/* =========================================
+INPUT
+========================================= */
+
+.login-input-wrapper {
+@apply flex h-12 items-center gap-3 rounded-lg border border-slate-200 bg-white px-3 transition-all duration-200;
+}
+
+.login-input-wrapper:focus-within {
+@apply border-blue-500;
+box-shadow: 0 0 0 2px rgb(59 130 246 / 10%);
+}
+
+.login-input-wrapper > svg {
+@apply shrink-0 text-slate-400;
+font-size: 19px;
+}
+
+.login-input-wrapper input {
+@apply w-full min-w-0 border-0 bg-transparent text-sm text-slate-800 outline-none;
+}
+
+.login-input-wrapper input::placeholder {
+@apply text-slate-400;
+}
+
+.login-input-error {
+@apply border-red-400;
+background: rgb(254 242 242 / 30%);
+}
+
+.login-input-error:focus-within {
+@apply border-red-500;
+box-shadow: 0 0 0 2px rgb(239 68 68 / 10%);
+}
+
+.login-field-error {
+@apply mt-1.5 text-red-500;
+font-size: 11px;
+font-weight: 500;
+}
+
+/* =========================================
+PASSWORD TOGGLE
+========================================= */
+
+.login-password-toggle {
+@apply flex shrink-0 cursor-pointer rounded border-0 bg-transparent p-1 text-slate-400 transition-colors hover:text-slate-600;
+}
+
+.login-password-toggle svg {
+@apply text-lg;
+}
+
+/* =========================================
+REMEMBER
+========================================= */
+
+.login-options {
+@apply -mt-1;
+}
+
+.login-remember {
+@apply flex cursor-pointer items-center gap-2 text-xs text-slate-500;
+}
+
+.login-remember input {
+@apply sr-only;
+}
+
+.login-custom-checkbox {
+@apply flex h-4 w-4 items-center justify-center rounded border border-slate-300 bg-white text-white;
+font-size: 9px;
+}
+
+.login-remember input:checked + .login-custom-checkbox {
+@apply border-blue-600 bg-blue-600;
+}
+
+/* =========================================
+SUBMIT
+========================================= */
+
+.login-submit {
+@apply flex h-12 w-full cursor-pointer items-center justify-center gap-3 rounded-xl bg-blue-600 text-sm font-semibold text-white transition-all duration-200 hover:bg-blue-700;
+box-shadow: 0 10px 25px rgb(37 99 235 / 20%);
+}
+
+.login-submit:hover {
+box-shadow: 0 15px 30px rgb(37 99 235 / 25%);
+}
+
+.login-submit:active {
+transform: scale(0.99);
+}
+
+.login-submit-arrow {
+@apply text-lg transition-transform duration-200;
+}
+
+.login-submit:hover .login-submit-arrow {
+@apply translate-x-1;
+}
+
+/* =========================================
+SIGNUP REDIRECT
+========================================= */
+
+.signup-redirect {
+@apply mt-7 text-center text-xs text-slate-500;
+}
+
+.signup-redirect a {
+@apply ml-1.5 font-semibold text-blue-600 transition-colors hover:text-blue-700;
+}
+
+/* =========================================
+MOBILE FOOTER
+========================================= */
+
+.login-mobile-footer {
+@apply mt-8 border-t border-slate-100 pt-6 text-center text-slate-400 lg:hidden;
+font-size: 11px;
+}
+
+/* =========================================
+LARGE DESKTOP
+========================================= */
+
+@media (min-width: 1280px) {
+.login-brand-content {
+@apply px-16;
+}
+
+.login-form-wrapper {
+@apply px-16;
+}
+}
+
+/* =========================================
+TABLET
+========================================= */
+
+@media (max-width: 1024px) {
+.login-layout {
+grid-template-columns: 1fr;
+}
+}
+
+/* =========================================
+MOBILE
+========================================= */
+
+@media (max-width: 640px) {
+.login-form-wrapper {
+@apply px-4 py-7;
+}
+
+.login-heading h2 {
+@apply text-2xl;
+}
+
+.login-mobile-brand {
+@apply mb-8;
+}
+}
+
+/* =========================================
+SMALL MOBILE
+========================================= */
+
+@media (max-width: 380px) {
+.login-form-wrapper {
+@apply px-3 py-6;
+}
+
+.login-heading h2 {
+@apply text-xl;
+}
+
+.login-input-wrapper {
+@apply h-11;
+}
+}

@@ -1,0 +1,347 @@
+@reference "../index.css";
+
+/* =========================================
+BACKDROP
+========================================= */
+
+.legal-modal-backdrop {
+@apply fixed z-[9999] flex items-center justify-center p-6;
+inset: 0;
+background: rgb(15 23 42 / 55%);
+backdrop-filter: blur(4px);
+}
+
+/* =========================================
+MAIN MODAL
+========================================= */
+
+.legal-modal {
+@apply flex w-full max-w-3xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl;
+max-height: 88vh;
+}
+
+/* =========================================
+HEADER
+========================================= */
+
+.legal-modal-header {
+@apply flex shrink-0 items-center justify-between gap-4 bg-slate-900 px-5 py-4 text-white;
+}
+
+.legal-modal-title {
+@apply flex min-w-0 items-center gap-3;
+}
+
+.legal-title-icon {
+@apply flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-blue-400;
+background: rgb(59 130 246 / 14%);
+border: 1px solid rgb(96 165 250 / 20%);
+}
+
+.legal-title-icon svg {
+@apply text-xl;
+}
+
+.legal-modal-title h2 {
+@apply m-0 text-sm font-bold leading-5 text-white sm:text-base;
+}
+
+.legal-modal-title p {
+@apply mt-0.5 text-slate-400;
+font-size: 11px;
+}
+
+.legal-close-button {
+@apply flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-lg text-slate-400 transition-colors;
+background: rgb(255 255 255 / 6%);
+border: 1px solid rgb(255 255 255 / 10%);
+}
+
+.legal-close-button:hover {
+@apply text-white;
+background: rgb(255 255 255 / 12%);
+}
+
+.legal-close-button svg {
+@apply text-xl;
+}
+
+/* =========================================
+TABS
+========================================= */
+
+.legal-tabs {
+@apply flex w-full shrink-0 border-b border-slate-200 bg-slate-50;
+}
+
+.legal-tab {
+@apply relative flex min-h-13 flex-1 cursor-pointer items-center justify-center gap-2 border-0 bg-transparent px-4 py-3 text-xs font-semibold text-slate-500 transition-colors;
+}
+
+.legal-tab:hover {
+@apply bg-slate-100 text-slate-700;
+}
+
+.legal-tab svg {
+@apply text-lg;
+}
+
+.legal-tab-active {
+@apply bg-white text-blue-600;
+}
+
+.legal-tab-active::after {
+content: "";
+
+@apply absolute bottom-0 h-0.5 rounded-t-full bg-blue-600;
+
+left: 18%;
+right: 18%;
+}
+
+/* =========================================
+CONTENT
+========================================= */
+
+.legal-modal-content {
+@apply min-h-0 flex-1 overflow-y-auto bg-white;
+}
+
+/* Scrollbar */
+
+.legal-modal-content::-webkit-scrollbar {
+width: 6px;
+}
+
+.legal-modal-content::-webkit-scrollbar-track {
+@apply bg-slate-50;
+}
+
+.legal-modal-content::-webkit-scrollbar-thumb {
+@apply rounded-full bg-slate-300;
+}
+
+.legal-modal-content::-webkit-scrollbar-thumb:hover {
+@apply bg-slate-400;
+}
+
+.legal-modal-content {
+scrollbar-width: thin;
+scrollbar-color: #cbd5e1 #f8fafc;
+}
+
+/* =========================================
+DOCUMENT
+========================================= */
+
+.legal-document {
+@apply px-7 py-7 sm:px-8;
+}
+
+.legal-document-intro {
+@apply border-b border-slate-200 pb-5;
+}
+
+.legal-document-label {
+@apply inline-block rounded-md bg-blue-50 px-2 py-1 font-bold text-blue-600;
+font-size: 9px;
+letter-spacing: 0.12em;
+}
+
+.legal-document-intro h3 {
+@apply mt-3 text-xl font-bold leading-7 text-slate-900;
+}
+
+.legal-updated {
+@apply mt-1 text-slate-400;
+font-size: 11px;
+}
+
+.legal-document-intro > p:last-child {
+@apply mt-4 text-xs leading-6 text-slate-500 sm:text-sm;
+}
+
+/* =========================================
+SECTIONS
+========================================= */
+
+.legal-document section {
+@apply pt-5;
+}
+
+.legal-document section h4 {
+@apply m-0 text-sm font-bold leading-5 text-slate-800;
+}
+
+.legal-document section p {
+@apply mt-2 text-xs leading-6 text-slate-500 sm:text-sm;
+}
+
+/* =========================================
+FOOTER
+========================================= */
+
+.legal-modal-footer {
+@apply flex shrink-0 items-center justify-between gap-5 border-t border-slate-200 bg-white px-5 py-3.5;
+min-height: 70px;
+}
+
+.legal-footer-note {
+@apply flex min-w-0 items-center gap-2 text-slate-400;
+font-size: 11px;
+}
+
+.legal-footer-note svg {
+@apply shrink-0 text-green-500;
+font-size: 17px;
+}
+
+.legal-accept-button {
+@apply flex h-10 shrink-0 cursor-pointer items-center justify-center gap-2 rounded-lg bg-blue-600 px-5 text-xs font-semibold text-white transition-colors hover:bg-blue-700;
+box-shadow: 0 5px 14px rgb(37 99 235 / 18%);
+}
+
+.legal-accept-button:active {
+transform: scale(0.98);
+}
+
+.legal-accept-button svg {
+@apply text-base;
+}
+
+/* =========================================
+TABLET
+========================================= */
+
+@media (max-width: 768px) {
+.legal-modal-backdrop {
+@apply p-4;
+}
+
+.legal-document {
+@apply px-6 py-6;
+}
+
+.legal-modal-footer {
+@apply px-4;
+}
+}
+
+/* =========================================
+MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+.legal-modal-backdrop {
+@apply p-2;
+}
+
+.legal-modal {
+max-height: 94vh;
+@apply rounded-xl;
+}
+
+.legal-modal-header {
+@apply px-4 py-3;
+}
+
+.legal-title-icon {
+@apply h-10 w-10;
+}
+
+.legal-modal-title h2 {
+@apply text-xs;
+}
+
+.legal-modal-title p {
+font-size: 10px;
+}
+
+.legal-close-button {
+@apply h-8 w-8;
+}
+
+.legal-tabs {
+@apply min-h-12;
+}
+
+.legal-tab {
+@apply min-h-12 px-2 py-2;
+font-size: 10px;
+}
+
+.legal-tab svg {
+@apply text-base;
+}
+
+.legal-tab-active::after {
+left: 12%;
+right: 12%;
+}
+
+.legal-document {
+@apply px-4 py-5;
+}
+
+.legal-document-intro {
+@apply pb-4;
+}
+
+.legal-document-intro h3 {
+@apply text-lg leading-6;
+}
+
+.legal-document-intro > p:last-child {
+@apply mt-3 text-xs leading-5;
+}
+
+.legal-document section {
+@apply pt-4;
+}
+
+.legal-document section h4 {
+@apply text-xs;
+}
+
+.legal-document section p {
+@apply mt-1.5 text-xs leading-5;
+}
+
+.legal-modal-footer {
+@apply flex-col items-stretch gap-2 px-4 py-3;
+}
+
+.legal-footer-note {
+@apply justify-center;
+}
+
+.legal-accept-button {
+@apply w-full;
+}
+}
+
+/* =========================================
+VERY SMALL
+========================================= */
+
+@media (max-width: 380px) {
+.legal-modal-backdrop {
+@apply p-1.5;
+}
+
+.legal-modal {
+max-height: 96vh;
+}
+
+.legal-modal-header {
+@apply px-3 py-3;
+}
+
+.legal-title-icon {
+@apply h-9 w-9;
+}
+
+.legal-document {
+@apply px-3.5 py-4;
+}
+}

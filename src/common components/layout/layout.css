@@ -1,0 +1,150 @@
+@reference "../../index.css";
+
+.app-layout {
+  @apply flex min-h-screen bg-slate-50;
+}
+
+.app-main {
+  @apply flex min-w-0 flex-1 flex-col;
+  margin-left: 270px;
+}
+
+.app-header {
+  @apply sticky top-0 z-40 flex h-[76px] items-center justify-between border-b border-slate-200 bg-white px-6;
+}
+
+.header-left {
+  @apply flex min-w-0 items-center gap-4;
+}
+
+.header-page-info h1 {
+  @apply m-0 text-lg font-bold text-slate-900;
+}
+
+.header-page-info span {
+  @apply mt-0.5 block text-xs text-slate-400;
+}
+
+.mobile-menu-button {
+  @apply hidden h-10 w-10 cursor-pointer items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-600;
+}
+
+.header-right {
+  @apply flex items-center gap-4;
+}
+
+.notification-button {
+  @apply relative flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-500 transition-colors;
+}
+
+.notification-button:hover {
+  @apply border-blue-200 bg-blue-50 text-blue-600;
+}
+
+.notification-button svg {
+  @apply text-[21px];
+}
+
+.notification-dot {
+  @apply absolute right-2 top-2 h-2 w-2 rounded-full bg-red-500;
+}
+
+.header-divider {
+  @apply h-8 w-px bg-slate-200;
+}
+
+.profile-wrapper {
+  @apply relative;
+}
+
+.header-profile {
+  @apply flex cursor-pointer items-center gap-2.5 border-0 bg-transparent p-0;
+}
+
+.header-avatar {
+  @apply flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 text-sm font-bold text-white;
+}
+
+.header-user-info {
+  @apply hidden min-w-0 flex-col text-left sm:flex;
+}
+
+.header-user-info strong {
+  @apply max-w-[150px] truncate text-xs font-semibold text-slate-800;
+}
+
+.header-user-info span {
+  @apply mt-0.5 text-[10px] text-slate-400;
+}
+
+.profile-arrow {
+  @apply text-slate-400 transition-transform;
+}
+
+.profile-arrow-open {
+  @apply rotate-180;
+}
+
+.profile-dropdown {
+  @apply absolute right-0 top-12 z-50 w-64 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xl;
+}
+
+.profile-dropdown-header {
+  @apply flex flex-col border-b border-slate-100 px-4 py-3;
+}
+
+.profile-dropdown-header strong {
+  @apply text-sm font-semibold text-slate-800;
+}
+
+.profile-dropdown-header span {
+  @apply mt-1 truncate text-xs text-slate-400;
+}
+
+.profile-dropdown button {
+  @apply w-full cursor-pointer border-0 bg-white px-4 py-3 text-left text-xs font-medium text-red-500 transition-colors;
+}
+
+.profile-dropdown button:hover {
+  @apply bg-red-50;
+}
+
+.app-content {
+  @apply min-w-0 flex-1 p-6;
+}
+
+@media (max-width: 1024px) {
+  .app-main {
+    margin-left: 0;
+  }
+
+  .mobile-menu-button {
+    @apply flex;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-header {
+    @apply h-[68px] px-4;
+  }
+
+  .header-page-info h1 {
+    @apply text-base;
+  }
+
+  .header-page-info span {
+    @apply hidden;
+  }
+
+  .header-right {
+    @apply gap-2;
+  }
+
+  .header-divider {
+    @apply hidden;
+  }
+
+  .app-content {
+    @apply p-4;
+  }
+}

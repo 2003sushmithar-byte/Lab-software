@@ -1,0 +1,501 @@
+@reference "../../index.css";
+
+/* ================================
+   PAGE
+================================ */
+
+.dashboard-page {
+  @apply w-full;
+}
+
+/* ================================
+   PAGE HEADER
+================================ */
+
+.dashboard-page-header {
+  @apply mb-6 flex items-start justify-between gap-4;
+}
+
+.dashboard-eyebrow {
+  @apply text-[10px] font-bold tracking-[0.14em] text-blue-600;
+}
+
+.dashboard-page-header h2 {
+  @apply m-0 mt-1.5 text-2xl font-bold tracking-tight text-slate-900;
+}
+
+.dashboard-page-header p {
+  @apply m-0 mt-1 text-sm text-slate-500;
+}
+
+.dashboard-date {
+  @apply flex shrink-0 flex-col items-end rounded-xl border border-slate-200 bg-white px-4 py-2.5;
+}
+
+.dashboard-date span {
+  @apply text-[10px] font-medium text-slate-400;
+}
+
+.dashboard-date strong {
+  @apply mt-0.5 text-xs font-semibold text-slate-700;
+}
+
+/* ================================
+   STAT CARDS
+================================ */
+
+.dashboard-stats-grid {
+  @apply grid grid-cols-4 gap-4;
+}
+
+.dashboard-stat-card {
+  @apply rounded-2xl border border-slate-200 bg-white p-4 transition-all duration-200;
+}
+
+.dashboard-stat-card:hover {
+  @apply -translate-y-0.5 shadow-lg shadow-slate-200/50;
+}
+
+.dashboard-stat-top {
+  @apply flex items-center justify-between;
+}
+
+.dashboard-stat-icon {
+  @apply flex h-10 w-10 items-center justify-center rounded-xl;
+}
+
+.dashboard-stat-icon svg {
+  @apply text-[21px];
+}
+
+.dashboard-stat-trend {
+  @apply text-[17px] text-slate-300;
+}
+
+.dashboard-stat-content {
+  @apply mt-4 flex flex-col;
+}
+
+.dashboard-stat-content > span {
+  @apply text-xs font-medium text-slate-500;
+}
+
+.dashboard-stat-content strong {
+  @apply mt-1 text-xl font-bold tracking-tight text-slate-900;
+}
+
+.dashboard-stat-content small {
+  @apply mt-1 text-[10px] text-slate-400;
+}
+
+/* ================================
+   STAT ICON VARIANTS
+================================ */
+
+.dashboard-stat-blue {
+  @apply bg-blue-50 text-blue-600;
+}
+
+.dashboard-stat-purple {
+  @apply bg-purple-50 text-purple-600;
+}
+
+.dashboard-stat-cyan {
+  @apply bg-cyan-50 text-cyan-600;
+}
+
+.dashboard-stat-orange {
+  @apply bg-orange-50 text-orange-600;
+}
+
+.dashboard-stat-yellow {
+  @apply bg-yellow-50 text-yellow-600;
+}
+
+.dashboard-stat-pink {
+  @apply bg-pink-50 text-pink-600;
+}
+
+.dashboard-stat-indigo {
+  @apply bg-indigo-50 text-indigo-600;
+}
+
+.dashboard-stat-red {
+  @apply bg-red-50 text-red-600;
+}
+
+.dashboard-stat-green {
+  @apply bg-green-50 text-green-600;
+}
+
+.dashboard-stat-emerald {
+  @apply bg-emerald-50 text-emerald-600;
+}
+
+.dashboard-stat-amber {
+  @apply bg-amber-50 text-amber-600;
+}
+
+.dashboard-stat-slate {
+  @apply bg-slate-100 text-slate-600;
+}
+
+/* ================================
+   COMMON SECTION
+================================ */
+
+.dashboard-section {
+  @apply mt-6;
+}
+
+.dashboard-section-header {
+  @apply mb-3;
+}
+
+.dashboard-section-header h3 {
+  @apply m-0 text-sm font-bold text-slate-800;
+}
+
+.dashboard-section-header p {
+  @apply m-0 mt-1 text-[11px] text-slate-400;
+}
+
+/* ================================
+   QUICK ACTIONS
+================================ */
+
+.dashboard-actions-grid {
+  @apply grid grid-cols-4 gap-3;
+}
+
+.dashboard-action-card {
+  @apply flex min-h-[58px] cursor-pointer items-center gap-3 rounded-xl border border-slate-200 bg-white px-3.5 text-left transition-all duration-200;
+}
+
+.dashboard-action-card:hover {
+  @apply border-blue-200 bg-blue-50/40 shadow-sm;
+}
+
+.dashboard-action-icon {
+  @apply flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600;
+}
+
+.dashboard-action-icon svg {
+  @apply text-[19px];
+}
+
+.dashboard-action-card > span:nth-child(2) {
+  @apply min-w-0 flex-1 text-xs font-semibold text-slate-700;
+}
+
+.dashboard-action-arrow {
+  @apply text-sm text-slate-300 transition-transform;
+}
+
+.dashboard-action-card:hover .dashboard-action-arrow {
+  @apply translate-x-0.5 text-blue-500;
+}
+
+/* ================================
+   MAIN DASHBOARD GRID
+================================ */
+
+.dashboard-main-grid {
+  @apply mt-6 grid grid-cols-2 gap-5;
+}
+
+.dashboard-panel {
+  @apply overflow-hidden rounded-2xl border border-slate-200 bg-white;
+}
+
+.dashboard-panel-header {
+  @apply flex items-start justify-between gap-4 border-b border-slate-100 px-5 py-4;
+}
+
+.dashboard-panel-header h3 {
+  @apply m-0 text-sm font-bold text-slate-800;
+}
+
+.dashboard-panel-header p {
+  @apply m-0 mt-1 text-[11px] text-slate-400;
+}
+
+.dashboard-panel-header select {
+  @apply cursor-pointer rounded-lg border border-slate-200 bg-white px-2.5 py-2 text-[10px] font-medium text-slate-600 outline-none;
+}
+
+.dashboard-panel-header select:focus {
+  @apply border-blue-400;
+}
+
+/* ================================
+   FINANCIAL
+================================ */
+
+.financial-summary {
+  @apply grid grid-cols-3 divide-x divide-slate-100;
+}
+
+.financial-item {
+  @apply flex flex-col px-5 py-4;
+}
+
+.financial-item span {
+  @apply text-[10px] font-medium text-slate-400;
+}
+
+.financial-item strong {
+  @apply mt-1 text-sm font-bold text-slate-800;
+}
+
+.financial-chart {
+  @apply px-5 pb-5;
+}
+
+.chart-labels {
+  @apply mb-2 flex items-center justify-between;
+}
+
+.chart-labels span {
+  @apply text-[10px] font-medium text-slate-500;
+}
+
+.chart-labels strong {
+  @apply text-[10px] font-bold text-slate-700;
+}
+
+.chart-bar {
+  @apply mb-4 h-2 overflow-hidden rounded-full bg-slate-100;
+}
+
+.chart-bar span {
+  @apply block h-full rounded-full bg-blue-500;
+}
+
+.expense-bar span {
+  @apply bg-orange-400;
+}
+
+/* ================================
+   WORKFLOW
+================================ */
+
+.workflow-list {
+  @apply divide-y divide-slate-100;
+}
+
+.workflow-row {
+  @apply flex items-center gap-3 px-5 py-3.5;
+}
+
+.workflow-icon {
+  @apply flex h-9 w-9 shrink-0 items-center justify-center rounded-lg;
+}
+
+.workflow-icon svg {
+  @apply text-[18px];
+}
+
+.workflow-row > div:nth-child(2) {
+  @apply flex min-w-0 flex-1 flex-col;
+}
+
+.workflow-row strong {
+  @apply truncate text-xs font-semibold text-slate-700;
+}
+
+.workflow-row span {
+  @apply mt-0.5 truncate text-[10px] text-slate-400;
+}
+
+.workflow-row > b {
+  @apply text-sm font-bold text-slate-700;
+}
+
+.workflow-blue {
+  @apply bg-blue-50 text-blue-600;
+}
+
+.workflow-orange {
+  @apply bg-orange-50 text-orange-600;
+}
+
+.workflow-purple {
+  @apply bg-purple-50 text-purple-600;
+}
+
+.workflow-green {
+  @apply bg-green-50 text-green-600;
+}
+
+/* ================================
+   RECENT REGISTRATIONS
+================================ */
+
+.dashboard-recent-panel {
+  @apply mt-5;
+}
+
+.dashboard-view-all {
+  @apply cursor-pointer border-0 bg-transparent text-[11px] font-semibold text-blue-600;
+}
+
+.dashboard-view-all:hover {
+  @apply text-blue-700;
+}
+
+.dashboard-table-wrapper {
+  @apply w-full overflow-x-auto;
+}
+
+.dashboard-table {
+  @apply w-full min-w-[760px] border-collapse;
+}
+
+.dashboard-table th {
+  @apply border-b border-slate-100 bg-slate-50/70 px-5 py-3 text-left text-[10px] font-bold uppercase tracking-wide text-slate-400;
+}
+
+.dashboard-table td {
+  @apply border-b border-slate-100 px-5 py-3.5 text-xs text-slate-600;
+}
+
+.dashboard-table tbody tr:last-child td {
+  @apply border-b-0;
+}
+
+.dashboard-table tbody tr:hover {
+  @apply bg-slate-50/50;
+}
+
+.registration-id {
+  @apply font-semibold text-blue-600;
+}
+
+/* ================================
+   STATUS
+================================ */
+
+.dashboard-status {
+  @apply inline-flex rounded-full px-2.5 py-1 text-[9px] font-semibold;
+}
+
+.status-sample-collected {
+  @apply bg-blue-50 text-blue-600;
+}
+
+.status-processing {
+  @apply bg-orange-50 text-orange-600;
+}
+
+.status-result-pending {
+  @apply bg-yellow-50 text-yellow-600;
+}
+
+.status-report-ready {
+  @apply bg-green-50 text-green-600;
+}
+
+.status-verified {
+  @apply bg-purple-50 text-purple-600;
+}
+
+/* ================================
+   LARGE TABLET
+================================ */
+
+@media (max-width: 1280px) {
+  .dashboard-stats-grid {
+    @apply grid-cols-3;
+  }
+
+  .dashboard-actions-grid {
+    @apply grid-cols-4;
+  }
+}
+
+/* ================================
+   TABLET
+================================ */
+
+@media (max-width: 1024px) {
+  .dashboard-stats-grid {
+    @apply grid-cols-2;
+  }
+
+  .dashboard-main-grid {
+    @apply grid-cols-1;
+  }
+}
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 640px) {
+  .dashboard-page-header {
+    @apply flex-col;
+  }
+
+  .dashboard-page-header h2 {
+    @apply text-xl;
+  }
+
+  .dashboard-date {
+    @apply w-full items-start;
+  }
+
+  .dashboard-stats-grid {
+    @apply grid-cols-1 gap-3;
+  }
+
+  .dashboard-actions-grid {
+    @apply grid-cols-2 gap-2;
+  }
+
+  .dashboard-action-card {
+    @apply min-h-[54px] px-2.5;
+  }
+
+  .dashboard-action-card > span:nth-child(2) {
+    @apply text-[10px];
+  }
+
+  .dashboard-action-arrow {
+    @apply hidden;
+  }
+
+  .dashboard-panel-header {
+    @apply px-4;
+  }
+
+  .financial-summary {
+    @apply grid-cols-1 divide-x-0 divide-y;
+  }
+
+  .financial-item {
+    @apply px-4 py-3;
+  }
+
+  .financial-chart {
+    @apply px-4 pb-4;
+  }
+
+  .workflow-row {
+    @apply px-4;
+  }
+}
+
+/* ================================
+   SMALL MOBILE
+================================ */
+
+@media (max-width: 400px) {
+  .dashboard-actions-grid {
+    @apply grid-cols-1;
+  }
+
+  .dashboard-action-card {
+    @apply min-h-[50px];
+  }
+}
