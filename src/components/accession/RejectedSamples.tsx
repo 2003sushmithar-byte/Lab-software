@@ -161,13 +161,11 @@ const sampleTypeStyles: Record<string, string> = {
 
 const RejectedSamples = () => {
   const navigate = useNavigate();
-
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
   const [reasonFilter, setReasonFilter] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
-
-  const rowsPerPage = 5;
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const filteredData = useMemo(() => {
     return rejectedSampleData.filter((sample) => {
@@ -191,11 +189,6 @@ const RejectedSamples = () => {
       return matchesSearch && matchesStatus && matchesReason;
     });
   }, [search, statusFilter, reasonFilter]);
-
-  const totalPages = Math.max(
-    1,
-    Math.ceil(filteredData.length / rowsPerPage)
-  );
 
   const currentData = filteredData.slice(
     (currentPage - 1) * rowsPerPage,
@@ -455,7 +448,7 @@ const RejectedSamples = () => {
             <Table
               columns={columns}
               data={currentData}
-              maxHeight="420px"
+              maxHeight="500px"
               renderRow={(sample: RejectedSample) => (
                 <>
                   {/* Accession */}
@@ -500,10 +493,9 @@ const RejectedSamples = () => {
                   {/* Sample */}
                   <td className="px-4 py-4">
                     <span
-                      className={`inline-flex whitespace-nowrap rounded-lg px-3 py-1.5 text-xs font-semibold ${
-                        sampleTypeStyles[sample.sampleType] ||
+                      className={`inline-flex whitespace-nowrap rounded-lg px-3 py-1.5 text-xs font-semibold ${sampleTypeStyles[sample.sampleType] ||
                         "bg-slate-100 text-slate-600"
-                      }`}
+                        }`}
                     >
                       {sample.sampleType}
                     </span>
@@ -619,9 +611,11 @@ const RejectedSamples = () => {
           {filteredData.length > 0 && (
             <div className="mt-5 border-t border-slate-100 pt-4">
               <Pagination
+                totalItems={filteredData.length}
+                rowsPerPage={rowsPerPage}
+                setRowsPerPage={setRowsPerPage}
                 currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={setCurrentPage}
+                setCurrentPage={setCurrentPage}
               />
             </div>
           )}

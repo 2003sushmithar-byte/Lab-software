@@ -25,12 +25,12 @@ interface TrackedSample {
   sampleType: string;
   barcode: string;
   currentStatus:
-    | "Collected"
-    | "Received"
-    | "Accepted"
-    | "Processing"
-    | "Completed"
-    | "Rejected";
+  | "Collected"
+  | "Received"
+  | "Accepted"
+  | "Processing"
+  | "Completed"
+  | "Rejected";
   currentLocation: string;
   collectedAt: string;
   receivedAt: string;
@@ -227,8 +227,7 @@ const SampleTracking = () => {
   const [statusFilter, setStatusFilter] = useState("All");
   const [locationFilter, setLocationFilter] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
-
-  const rowsPerPage = 5;
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const filteredSamples = useMemo(() => {
     return sampleData.filter((sample) => {
@@ -252,11 +251,6 @@ const SampleTracking = () => {
       return matchesSearch && matchesStatus && matchesLocation;
     });
   }, [searchTerm, statusFilter, locationFilter]);
-
-  const totalPages = Math.max(
-    1,
-    Math.ceil(filteredSamples.length / rowsPerPage)
-  );
 
   const currentData = filteredSamples.slice(
     (currentPage - 1) * rowsPerPage,
@@ -326,19 +320,17 @@ const SampleTracking = () => {
                 className="relative z-10 flex flex-col items-center"
               >
                 <div
-                  className={`h-4 w-4 rounded-full border-2 ${
-                    completed
+                  className={`h-4 w-4 rounded-full border-2 ${completed
                       ? "border-emerald-500 bg-emerald-500"
                       : "border-gray-300 bg-white"
-                  }`}
+                    }`}
                 />
 
                 <span
-                  className={`mt-1 text-[9px] whitespace-nowrap ${
-                    completed
+                  className={`mt-1 text-[9px] whitespace-nowrap ${completed
                       ? "font-medium text-emerald-700"
                       : "text-gray-400"
-                  }`}
+                    }`}
                 >
                   {stage}
                 </span>
@@ -678,11 +670,10 @@ const SampleTracking = () => {
 
                   <div className="mt-2 h-1.5 w-full min-w-[180px] overflow-hidden rounded-full bg-gray-100">
                     <div
-                      className={`h-full rounded-full transition-all ${
-                        sample.currentStatus === "Rejected"
+                      className={`h-full rounded-full transition-all ${sample.currentStatus === "Rejected"
                           ? "bg-red-500"
                           : "bg-emerald-500"
-                      }`}
+                        }`}
                       style={{
                         width: getProgressWidth(sample.currentStatus),
                       }}
@@ -723,9 +714,11 @@ const SampleTracking = () => {
         {filteredSamples.length > 0 && (
           <div className="mt-4 border-t border-gray-100 pt-4">
             <Pagination
+              totalItems={filteredSamples.length}
+              rowsPerPage={rowsPerPage}
+              setRowsPerPage={setRowsPerPage}
               currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={setCurrentPage}
+              setCurrentPage={setCurrentPage}
             />
           </div>
         )}

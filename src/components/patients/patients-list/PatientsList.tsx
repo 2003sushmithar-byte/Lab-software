@@ -120,23 +120,14 @@ const columns = [
 
 const PatientList = () => {
   const navigate = useNavigate();
-
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [, setOpenMenu] = useState<string | null>(null);
-
-  const rowsPerPage = 5;
-
-  const [selectedPatient, setSelectedPatient] =
-    useState<Patient | null>(null);
-
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
   const [isViewDrawerOpen, setIsViewDrawerOpen] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
 
-  /*
-   * Load patients from localStorage.
-   * If no patients exist, initialize with demo data.
-   */
   const [patients, setPatients] = useState<Patient[]>(() => {
     const storedPatients = localStorage.getItem("lab_patients");
 
@@ -162,9 +153,6 @@ const PatientList = () => {
     }
   });
 
-  /*
-   * Search
-   */
   const filteredPatients = useMemo(() => {
     const value = search.trim().toLowerCase();
 
@@ -187,38 +175,22 @@ const PatientList = () => {
     );
   }, [search, patients]);
 
-  /*
-   * Pagination
-   */
-  const totalPages = Math.ceil(
-    filteredPatients.length / rowsPerPage
-  );
-
   const currentData = filteredPatients.slice(
     (currentPage - 1) * rowsPerPage,
     currentPage * rowsPerPage
   );
 
-  /*
-   * Search handler
-   */
   const handleSearch = (value: string) => {
     setSearch(value);
     setCurrentPage(1);
   };
 
-  /*
-   * View patient
-   */
   const handleView = (patient: Patient) => {
     setSelectedPatient({ ...patient });
     setIsEditMode(false);
     setIsViewDrawerOpen(true);
   };
 
-  /*
-   * Edit patient
-   */
   const handleEdit = (patient: Patient) => {
     setSelectedPatient({ ...patient });
     setIsEditMode(true);
@@ -226,9 +198,9 @@ const PatientList = () => {
   };
 
   const handleHistory = () => {
-  navigate("/patients/history");
-  setOpenMenu(null);
-};
+    navigate("/patients/history");
+    setOpenMenu(null);
+  };
 
   const handleSavePatient = () => {
     if (!selectedPatient) {
@@ -295,7 +267,7 @@ const PatientList = () => {
       </div>
 
       {/* ================= MAIN CARD ================= */}
-      <div className="rounded-2xl border border-slate-200 bg-white shadow-sm">
+      <div className="overflow-visible rounded-2xl border border-slate-200 bg-white shadow-sm">
 
         {/* ================= SEARCH ================= */}
         <div className="border-b border-slate-200 p-4 sm:p-5">
@@ -331,7 +303,7 @@ const PatientList = () => {
           <Table
             columns={columns}
             data={currentData}
-            maxHeight="500px"
+            maxHeight="430px"
             renderRow={(patient: Patient) => (
               <>
                 <td className="whitespace-nowrap px-4 py-4 text-sm font-medium text-slate-700">
@@ -345,9 +317,7 @@ const PatientList = () => {
                 <td className="whitespace-nowrap px-4 py-4">
                   <div className="flex items-center gap-3">
                     <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-blue-50 text-sm font-semibold text-blue-600">
-                      {patient.patientName
-                        .charAt(0)
-                        .toUpperCase()}
+                      {patient.patientName.charAt(0).toUpperCase()}
                     </div>
 
                     <span className="text-sm font-semibold text-slate-700">
@@ -376,29 +346,23 @@ const PatientList = () => {
                   {patient.registrationDate}
                 </td>
 
-               <td className="whitespace-nowrap px-4 py-4">
-  <span
-    className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${
-      patient.status === "Active"
-        ? "bg-emerald-50 text-emerald-700"
-        : patient.status === "Pending"
-        ? "bg-amber-50 text-amber-700"
-        : patient.status === "Completed"
-        ? "bg-blue-50 text-blue-700"
-        : patient.status === "New Registration"
-        ? "bg-indigo-50 text-indigo-700"
-        : "bg-slate-100 text-slate-700"
-    }`}
-  >
-    {patient.status}
-  </span>
-</td>
+                <td className="whitespace-nowrap px-4 py-4">
+                  <span
+                    className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${patient.status === "Active"
+                        ? "bg-emerald-50 text-emerald-700"
+                        : patient.status === "Pending"
+                          ? "bg-amber-50 text-amber-700"
+                          : patient.status === "Completed"
+                            ? "bg-blue-50 text-blue-700"
+                            : "bg-slate-100 text-slate-700"
+                      }`}
+                  >
+                    {patient.status}
+                  </span>
+                </td>
 
-                {/* ACTIONS */}
                 <td className="relative whitespace-nowrap px-4 py-4">
                   <div className="flex items-center gap-1">
-
-                    {/* VIEW */}
                     <button
                       type="button"
                       title="View"
@@ -408,7 +372,6 @@ const PatientList = () => {
                       <VisibilityOutlinedIcon fontSize="small" />
                     </button>
 
-                    {/* EDIT */}
                     <button
                       type="button"
                       title="Edit"
@@ -418,7 +381,6 @@ const PatientList = () => {
                       <EditOutlinedIcon fontSize="small" />
                     </button>
 
-                    {/* HISTORY */}
                     <button
                       type="button"
                       title="History"
@@ -427,7 +389,6 @@ const PatientList = () => {
                     >
                       <HistoryOutlinedIcon fontSize="small" />
                     </button>
-
                   </div>
                 </td>
               </>
@@ -435,7 +396,6 @@ const PatientList = () => {
           />
         </div>
 
-        {/* ================= EMPTY STATE ================= */}
         {filteredPatients.length === 0 && (
           <div className="flex flex-col items-center justify-center px-5 py-14 text-center">
             <div className="mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-slate-100">
@@ -453,21 +413,21 @@ const PatientList = () => {
           </div>
         )}
 
-        {/* ================= PAGINATION ================= */}
-        {filteredPatients.length > 0 && totalPages > 1 && (
-          <div className="border-t border-slate-200 px-4 py-4">
+        {filteredPatients.length > 0 && (
+          <div className="shrink-0 border-t border-slate-200 bg-white px-4 py-4">
             <Pagination
+              totalItems={filteredPatients.length}
+              rowsPerPage={rowsPerPage}
+              setRowsPerPage={(value) => {
+                setRowsPerPage(value);
+                setCurrentPage(1);
+              }}
               currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={setCurrentPage}
+              setCurrentPage={setCurrentPage}
             />
           </div>
         )}
       </div>
-
-      {/* ================================================= */}
-      {/* RIGHT SIDE PATIENT DRAWER */}
-      {/* ================================================= */}
 
       {isViewDrawerOpen && selectedPatient && (
         <>
@@ -762,15 +722,14 @@ const PatientList = () => {
                       </select>
                     ) : (
                       <span
-                        className={`mt-1 inline-flex rounded-full px-2.5 py-1 text-xs font-medium ${
-                          selectedPatient.status ===
+                        className={`mt-1 inline-flex rounded-full px-2.5 py-1 text-xs font-medium ${selectedPatient.status ===
                           "Completed"
-                            ? "bg-green-50 text-green-700"
-                            : selectedPatient.status ===
-                              "Pending"
+                          ? "bg-green-50 text-green-700"
+                          : selectedPatient.status ===
+                            "Pending"
                             ? "bg-amber-50 text-amber-700"
                             : "bg-blue-50 text-blue-700"
-                        }`}
+                          }`}
                       >
                         {selectedPatient.status}
                       </span>
