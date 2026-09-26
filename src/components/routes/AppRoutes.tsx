@@ -10,6 +10,8 @@ import PatientHistory from "../patients/history/PatientHistory";
 import SampleCollection from "../accession/SampleCollection";
 import ReceivedSamples from "../accession/ReceivedSamples";
 import AcceptedSamples from "../accession/AcceptedSamples";
+import Collection from "../financial analysis/collections/collection";
+import Revenue from "../financial analysis/revenue/revenue";
 
 const AppRoutes = () => {
     console.log("CURRENT PATH:", window.location.pathname);
@@ -17,6 +19,7 @@ const AppRoutes = () => {
         <Routes>
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
+
 
             <Route element={<ProtectedRoute />}>
                 <Route element={<Layout />}>
@@ -27,8 +30,18 @@ const AppRoutes = () => {
                     <Route path="/accession/sample-collection" element={<SampleCollection />} />
                     <Route path="/accession/received-samples" element={<ReceivedSamples />} />
                     <Route path="/accession/accepted-samples" element={<AcceptedSamples />} />
-                </Route>
-            </Route>
+                       {/* Active Financial Analysis Pages */}
+                    <Route
+                      path="/financial-analysis/collections"
+                      element={<Collection />}
+                    />
+                    <Route
+                      path="/financial-analysis/revenue"
+                      element={<Revenue />}
+                    />
+                          </Route>
+                      </Route>
+
 
             <Route path="*" element={<div className="p-10 text-center"> ROUTE NOT FOUND: {window.location.pathname} </div>} />
 

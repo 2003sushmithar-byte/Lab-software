@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
 import PeopleOutlineOutlinedIcon from "@mui/icons-material/PeopleOutlineOutlined";
 import ScienceOutlinedIcon from "@mui/icons-material/ScienceOutlined";
@@ -251,19 +251,27 @@ const menuItems: MenuItem[] = [
     children: [
       {
         label: "Today's Collection",
-        path: "/financial-analysis/today",
+        path: "/financial-analysis/collections",
       },
       {
         label: "Test-wise Revenue",
-        path: "/financial-analysis/test-revenue",
+        path: "/financial-analysis/revenue",
       },
       {
-        label: "Monthly Revenue",
-        path: "/financial-analysis/monthly-revenue",
+        label: "Total Billing",
+        path: "/financial-analysis/total-billing",
+      },
+      {
+        label: "Discounts",
+        path: "/financial-analysis/discounts",
       },
       {
         label: "Pending Payments",
         path: "/financial-analysis/pending-payments",
+      },
+      {
+        label: "Monthly Revenue",
+        path: "/financial-analysis/monthly-revenue",
       },
       {
         label: "Payment Statistics",
@@ -377,10 +385,29 @@ const menuItems: MenuItem[] = [
 
 const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
   const { user } = useAuth();
+  const location = useLocation();
 
-  const [openMenus, setOpenMenus] = useState<string[]>([
-    "Patients",
-  ]);
+  const [openMenus, setOpenMenus] = useState<string[]>(() => {
+    const initial = ["Patients"];
+    menuItems.forEach((item) => {
+      if (item.children?.some((child) => window.location.pathname.startsWith(child.path))) {
+        if (!initial.includes(item.label)) {
+          initial.push(item.label);
+        }
+      }
+    });
+    return initial;
+  });
+
+  useEffect(() => {
+    menuItems.forEach((item) => {
+      if (item.children?.some((child) => location.pathname.startsWith(child.path))) {
+        setOpenMenus((previous) =>
+          previous.includes(item.label) ? previous : [...previous, item.label]
+        );
+      }
+    });
+  }, [location.pathname]);
 
   if (!user) {
     return null;
