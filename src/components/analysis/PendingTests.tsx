@@ -165,7 +165,7 @@ const PendingTests = () => {
     const [priorityFilter, setPriorityFilter] = useState("All");
     const [categoryFilter, setCategoryFilter] = useState("All");
     const [currentPage, setCurrentPage] = useState(1);
-    const rowsPerPage = 5;
+    const [rowsPerPage, setRowsPerPage] = useState(5);
     const [selectedTest, setSelectedTest] = useState<PendingTest | null>(null);
     const [showDetails, setShowDetails] = useState(false);
 
@@ -191,11 +191,6 @@ const PendingTests = () => {
             return matchesSearch && matchesPriority && matchesCategory;
         });
     }, [searchTerm, priorityFilter, categoryFilter]);
-
-    const totalPages = Math.max(
-        1,
-        Math.ceil(filteredTests.length / rowsPerPage)
-    );
 
     const currentData = filteredTests.slice(
         (currentPage - 1) * rowsPerPage,
@@ -439,7 +434,7 @@ const PendingTests = () => {
                     <Table
                         columns={columns}
                         data={currentData}
-                        maxHeight="500px"
+                        maxHeight="380px"
                         renderRow={(test: PendingTest) => (
                             <>
                                 {/* Sample ID */}
@@ -580,9 +575,11 @@ const PendingTests = () => {
                 {filteredTests.length > 0 && (
                     <div className="mt-4 border-t border-gray-100 pt-4">
                         <Pagination
+                            totalItems={filteredTests.length}
+                            rowsPerPage={rowsPerPage}
+                            setRowsPerPage={setRowsPerPage}
                             currentPage={currentPage}
-                            totalPages={totalPages}
-                            onPageChange={setCurrentPage}
+                            setCurrentPage={setCurrentPage}
                         />
                     </div>
                 )}

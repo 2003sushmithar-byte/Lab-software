@@ -159,7 +159,7 @@ const Completed = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [resultStatusFilter, setResultStatusFilter] = useState("All");
     const [currentPage, setCurrentPage] = useState(1);
-    const rowsPerPage = 5;
+    const [rowsPerPage, setRowsPerPage] = useState(5);
     const [selectedTest, setSelectedTest] = useState<CompletedTest | null>(null);
     const [showDetails, setShowDetails] = useState(false);
     const [showPrintForm, setShowPrintForm] = useState(false);
@@ -185,11 +185,6 @@ const Completed = () => {
             return matchesSearch && matchesResultStatus;
         });
     }, [searchTerm, resultStatusFilter]);
-
-    const totalPages = Math.max(
-        1,
-        Math.ceil(filteredTests.length / rowsPerPage)
-    );
 
     const currentData = filteredTests.slice(
         (currentPage - 1) * rowsPerPage,
@@ -459,7 +454,7 @@ const Completed = () => {
                     <Table
                         columns={columns}
                         data={currentData}
-                        maxHeight="500px"
+                        maxHeight="380px"
                         renderRow={(test: CompletedTest) => (
                             <>
                                 {/* Sample ID */}
@@ -567,8 +562,8 @@ const Completed = () => {
                                 <td className="px-4 py-3">
                                     <span
                                         className={`inline-flex whitespace-nowrap rounded-full border px-3 py-1 text-[11px] font-semibold ${test.resultStatus === "Ready for Results"
-                                                ? "border-blue-200 bg-blue-50 text-blue-700"
-                                                : "border-purple-200 bg-purple-50 text-purple-700"
+                                            ? "border-blue-200 bg-blue-50 text-blue-700"
+                                            : "border-purple-200 bg-purple-50 text-purple-700"
                                             }`}
                                     >
                                         {test.resultStatus}
@@ -609,9 +604,11 @@ const Completed = () => {
                 {filteredTests.length > 0 && (
                     <div className="mt-4 border-t border-gray-100 pt-4">
                         <Pagination
+                            totalItems={filteredTests.length}
+                            rowsPerPage={rowsPerPage}
+                            setRowsPerPage={setRowsPerPage}
                             currentPage={currentPage}
-                            totalPages={totalPages}
-                            onPageChange={setCurrentPage}
+                            setCurrentPage={setCurrentPage}
                         />
                     </div>
                 )}
@@ -702,8 +699,8 @@ const Completed = () => {
 
                                     <span
                                         className={`rounded-full border px-3 py-1 text-[11px] font-semibold ${selectedTest.resultStatus === "Ready for Results"
-                                                ? "border-blue-200 bg-blue-50 text-blue-700"
-                                                : "border-purple-200 bg-purple-50 text-purple-700"
+                                            ? "border-blue-200 bg-blue-50 text-blue-700"
+                                            : "border-purple-200 bg-purple-50 text-purple-700"
                                             }`}
                                     >
                                         {selectedTest.resultStatus}
@@ -1177,9 +1174,9 @@ const Completed = () => {
 
                                                             <span
                                                                 className={`inline-flex rounded-full px-2.5 py-1 text-[10px] font-semibold ${selectedTest.resultStatus ===
-                                                                        "Ready for Results"
-                                                                        ? "bg-blue-50 text-blue-700"
-                                                                        : "bg-purple-50 text-purple-700"
+                                                                    "Ready for Results"
+                                                                    ? "bg-blue-50 text-blue-700"
+                                                                    : "bg-purple-50 text-purple-700"
                                                                     }`}
                                                             >
                                                                 {selectedTest.resultStatus}
