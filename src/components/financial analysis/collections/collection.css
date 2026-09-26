@@ -1,0 +1,56 @@
+@reference "../../../index.css";
+
+/* ==========================================================================
+   Today's Collection Styling
+   Medical Laboratory Management System
+   ========================================================================== */
+
+.collection-page {
+  @apply w-full;
+}
+
+/* Payment Method Badges */
+.method-upi {
+  @apply bg-blue-50 text-blue-700 border border-blue-200/60;
+}
+
+.method-cash {
+  @apply bg-emerald-50 text-emerald-700 border border-emerald-200/60;
+}
+
+.method-card {
+  @apply bg-purple-50 text-purple-700 border border-purple-200/60;
+}
+
+.method-online {
+  @apply bg-amber-50 text-amber-700 border border-amber-200/60;
+}
+
+/* Custom scrollbar for tables on small screens */
+.collection-page .overflow-x-auto::-webkit-scrollbar {
+  height: 6px;
+}
+
+.collection-page .overflow-x-auto::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-slate-300;
+}
+
+/* Print Styles */
+@media print {
+  .app-sidebar,
+  .app-header,
+  .mobile-menu-button,
+  .collection-page button,
+  .collection-page input,
+  .collection-page select {
+    display: none !important;
+  }
+
+  .app-main {
+    margin-left: 0 !important;
+  }
+
+  .collection-page {
+    padding: 0 !important;
+  }
+}
