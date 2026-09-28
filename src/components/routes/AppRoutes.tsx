@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import ProtectedRoute from "../auth/ProtectedRoute";
 import Layout from "../../common components/layout/Layout";
 import Signup from "../home/Signup";
@@ -12,41 +12,85 @@ import ReceivedSamples from "../accession/ReceivedSamples";
 import AcceptedSamples from "../accession/AcceptedSamples";
 import Collection from "../financial analysis/collections/collection";
 import Revenue from "../financial analysis/revenue/revenue";
+import TotalBilling from "../financial analysis/total-billing/totalBilling";
+import Discounts from "../financial analysis/discounts/discounts";
+import PendingPayments from "../financial analysis/pending-payments/pendingPayments";
+import MonthlyRevenue from "../financial analysis/monthly-revenue/monthlyRevenue";
+import PaymentStatistics from "../financial analysis/payment-statistics/paymentStatistics";
 
 const AppRoutes = () => {
-    console.log("CURRENT PATH:", window.location.pathname);
-    return (
-        <Routes>
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/login" element={<Login />} />
+  return (
+    <Routes>
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/login" element={<Login />} />
 
+      <Route element={<ProtectedRoute />}>
+        <Route element={<Layout />}>
+          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/dashboard" element={<Dashboard />} />
 
-            <Route element={<ProtectedRoute />}>
-                <Route element={<Layout />}>
-                    <Route path="/dashboard" element={<Dashboard />} />
-                    <Route path="/patients" element={<PatientList />} />
-                    <Route path="/patients/new-registration" element={<NewRegistration />} />
-                    <Route path="/patients/history" element={<PatientHistory />} />
-                    <Route path="/accession/sample-collection" element={<SampleCollection />} />
-                    <Route path="/accession/received-samples" element={<ReceivedSamples />} />
-                    <Route path="/accession/accepted-samples" element={<AcceptedSamples />} />
-                       {/* Active Financial Analysis Pages */}
-                    <Route
-                      path="/financial-analysis/collections"
-                      element={<Collection />}
-                    />
-                    <Route
-                      path="/financial-analysis/revenue"
-                      element={<Revenue />}
-                    />
-                          </Route>
-                      </Route>
+          {/* Patients */}
+          <Route path="/patients" element={<PatientList />} />
+          <Route path="/patients/new-registration" element={<NewRegistration />} />
+          <Route path="/patients/history" element={<PatientHistory />} />
 
+          {/* Accession */}
+          <Route path="/accession/sample-collection" element={<SampleCollection />} />
+          <Route path="/accession/received-samples" element={<ReceivedSamples />} />
+          <Route path="/accession/accepted-samples" element={<AcceptedSamples />} />
 
-            <Route path="*" element={<div className="p-10 text-center"> ROUTE NOT FOUND: {window.location.pathname} </div>} />
+          {/* Active Financial Analysis Pages */}
+          <Route
+            path="/financial-analysis/collections"
+            element={<Collection />}
+          />
+          <Route
+            path="/financial-analysis/revenue"
+            element={<Revenue />}
+          />
+          <Route
+            path="/financial-analysis/total-billing"
+            element={<TotalBilling />}
+          />
+          <Route
+            path="/financial-analysis/discounts"
+            element={<Discounts />}
+          />
+          <Route
+            path="/financial-analysis/pending-payments"
+            element={<PendingPayments />}
+          />
+          <Route
+            path="/financial-analysis/monthly-revenue"
+            element={<MonthlyRevenue />}
+          />
+          <Route
+            path="/financial-analysis/payment-statistics"
+            element={<PaymentStatistics />}
+          />
 
-        </Routes>
-    );
+          {/* Route Aliases */}
+          <Route
+            path="/financial-analysis"
+            element={<Navigate to="/financial-analysis/collections" replace />}
+          />
+          <Route
+            path="/financial-analysis/today"
+            element={<Navigate to="/financial-analysis/collections" replace />}
+          />
+          <Route
+            path="/financial-analysis/test-revenue"
+            element={<Navigate to="/financial-analysis/revenue" replace />}
+          />
+        </Route>
+      </Route>
+
+      <Route
+        path="*"
+        element={<div className="p-10 text-center"> ROUTE NOT FOUND: {window.location.pathname} </div>}
+      />
+    </Routes>
+  );
 };
 
 export default AppRoutes;
