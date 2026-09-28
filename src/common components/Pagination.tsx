@@ -1,120 +1,98 @@
 import React from "react";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 interface PaginationProps {
+  totalItems: number;
+  rowsPerPage: number;
+  setRowsPerPage: (value: number) => void;
   currentPage: number;
-  totalPages: number;
-  onPageChange: (page: number) => void;
+  setCurrentPage: (value: number) => void;
 }
 
 const Pagination: React.FC<PaginationProps> = ({
+  totalItems,
+  rowsPerPage,
+  setRowsPerPage,
   currentPage,
-  totalPages,
-  onPageChange,
+  setCurrentPage,
 }) => {
-  if (totalPages <= 1) {
+  const totalPages =
+    totalItems === 0
+      ? 1
+      : rowsPerPage >= totalItems
+        ? 1
+        : Math.ceil(totalItems / rowsPerPage);
+
+  const startIndex =
+    totalItems === 0
+      ? 0
+      : (currentPage - 1) * rowsPerPage + 1;
+
+  const endIndex =
+    totalItems === 0
+      ? 0
+      : Math.min(currentPage * rowsPerPage, totalItems);
+
+  if (totalItems === 0) {
     return null;
   }
 
-  const getPageNumbers = () => {
-    const pages: (number | string)[] = [];
-
-    if (totalPages <= 5) {
-      for (let i = 1; i <= totalPages; i++) {
-        pages.push(i);
-      }
-
-      return pages;
-    }
-
-    pages.push(1);
-
-    if (currentPage > 3) {
-      pages.push("...");
-    }
-
-    const startPage = Math.max(2, currentPage - 1);
-    const endPage = Math.min(totalPages - 1, currentPage + 1);
-
-    for (let i = startPage; i <= endPage; i++) {
-      pages.push(i);
-    }
-
-    if (currentPage < totalPages - 2) {
-      pages.push("...");
-    }
-
-    pages.push(totalPages);
-
-    return pages;
-  };
-
-  const pages = getPageNumbers();
-
   return (
-    <div className="flex w-full flex-col items-center justify-between gap-4 sm:flex-row">
-      {/* Page information */}
-      <p className="text-sm text-slate-500">
-        Page{" "}
-        <span className="font-semibold text-slate-700">{currentPage}</span>{" "}
-        of{" "}
-        <span className="font-semibold text-slate-700">{totalPages}</span>
-      </p>
+    <div className="flex w-full items-center justify-end px-4 py-4">
+      <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2">
+          <span className="whitespace-nowrap text-sm text-slate-500">
+            Rows per page:
+          </span>
 
-      {/* Pagination buttons */}
-      <div className="flex items-center gap-1">
+          <select
+            value={rowsPerPage >= totalItems ? "all" : rowsPerPage}
+            onChange={(event) => {
+              const value =
+                event.target.value === "all"
+                  ? totalItems
+                  : Number(event.target.value);
+
+              setRowsPerPage(value);
+              setCurrentPage(1);
+            }}
+            className="cursor-pointer rounded-lg border border-slate-200 bg-white px-2 py-1.5 text-sm text-slate-600 outline-none transition focus:border-blue-500"
+            aria-label="Rows per page"
+          >
+            <option value={5}>5</option>
+            <option value={10}>10</option>
+            <option value={15}>15</option>
+            <option value="all">All</option>
+          </select>
+        </div>
+
+        {/* Item count */}
+        <span className="whitespace-nowrap text-sm text-slate-500">
+          {startIndex}-{endIndex} of {totalItems}
+        </span>
+
         {/* Previous */}
         <button
           type="button"
           disabled={currentPage === 1}
-          onClick={() => onPageChange(currentPage - 1)}
-          className={`flex h-9 w-9 items-center justify-center rounded-lg border transition ${currentPage === 1
-              ? "cursor-not-allowed border-slate-200 text-slate-300"
-              : "border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-blue-600"
-            }`}
+          onClick={() => setCurrentPage(currentPage - 1)}
+          className="flex h-8 w-8 items-center justify-center rounded-full text-slate-500 transition hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-40"
           aria-label="Previous page"
         >
-          <ChevronLeftIcon fontSize="small" />
+          <KeyboardArrowLeftIcon fontSize="small" />
         </button>
 
-        {/* Pages */}
-        {pages.map((page, index) =>
-          page === "..." ? (
-            <span
-              key={`ellipsis-${index}`}
-              className="flex h-9 w-9 items-center justify-center text-sm text-slate-400"
-            >
-              ...
-            </span>
-          ) : (
-            <button
-              key={page}
-              type="button"
-              onClick={() => onPageChange(page as number)}
-              className={`flex h-9 min-w-9 items-center justify-center rounded-lg border px-2 text-sm font-medium transition ${currentPage === page
-                  ? "border-blue-600 bg-blue-600 text-white"
-                  : "border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-blue-600"
-                }`}
-            >
-              {page}
-            </button>
-          )
-        )}
-
-        {/* Next */}
         <button
           type="button"
           disabled={currentPage === totalPages}
-          onClick={() => onPageChange(currentPage + 1)}
-          className={`flex h-9 w-9 items-center justify-center rounded-lg border transition ${currentPage === totalPages
-              ? "cursor-not-allowed border-slate-200 text-slate-300"
-              : "border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-blue-600"
-            }`}
+          onClick={() => setCurrentPage(currentPage + 1)}
+          className="flex h-8 w-8 items-center justify-center rounded-full text-slate-500 transition hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-40"
           aria-label="Next page"
         >
-          <ChevronRightIcon fontSize="small" />
+          <KeyboardArrowRightIcon fontSize="small" />
         </button>
+
       </div>
     </div>
   );

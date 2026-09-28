@@ -138,12 +138,10 @@ const sampleTypeStyles: Record<string, string> = {
 
 const SampleCollection = () => {
     const navigate = useNavigate();
-
     const [search, setSearch] = useState("");
     const [statusFilter, setStatusFilter] = useState("All");
     const [currentPage, setCurrentPage] = useState(1);
-
-    const rowsPerPage = 5;
+    const [rowsPerPage, setRowsPerPage] = useState(5);
 
     const filteredData = useMemo(() => {
         return sampleData.filter((sample) => {
@@ -162,8 +160,6 @@ const SampleCollection = () => {
             return matchesSearch && matchesStatus;
         });
     }, [search, statusFilter]);
-
-    const totalPages = Math.ceil(filteredData.length / rowsPerPage);
 
     const currentData = filteredData.slice(
         (currentPage - 1) * rowsPerPage,
@@ -381,7 +377,7 @@ const SampleCollection = () => {
                         <Table
                             columns={columns}
                             data={currentData}
-                            maxHeight="420px"
+                            maxHeight="500px"
                             renderRow={(sample: Sample) => (
                                 <>
                                     {/* Accession */}
@@ -535,10 +531,12 @@ const SampleCollection = () => {
                     {/* Pagination */}
                     {filteredData.length > 0 && (
                         <div className="mt-5 border-t border-slate-100 pt-4">
-                            <Pagination
+                             <Pagination
+                                totalItems={filteredData.length}
+                                rowsPerPage={rowsPerPage}
+                                setRowsPerPage={setRowsPerPage}
                                 currentPage={currentPage}
-                                totalPages={totalPages}
-                                onPageChange={setCurrentPage}
+                                setCurrentPage={setCurrentPage}
                             />
                         </div>
                     )}

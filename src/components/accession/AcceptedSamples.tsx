@@ -153,12 +153,10 @@ const sampleTypeStyles: Record<string, string> = {
 
 const AcceptedSamples = () => {
     const navigate = useNavigate();
-
     const [search, setSearch] = useState("");
     const [statusFilter, setStatusFilter] = useState("All");
     const [currentPage, setCurrentPage] = useState(1);
-
-    const rowsPerPage = 5;
+    const [rowsPerPage, setRowsPerPage] = useState(5);
 
     const filteredData = useMemo(() => {
         return acceptedSampleData.filter((sample) => {
@@ -177,11 +175,6 @@ const AcceptedSamples = () => {
             return matchesSearch && matchesStatus;
         });
     }, [search, statusFilter]);
-
-    const totalPages = Math.max(
-        1,
-        Math.ceil(filteredData.length / rowsPerPage)
-    );
 
     const currentData = filteredData.slice(
         (currentPage - 1) * rowsPerPage,
@@ -399,7 +392,7 @@ const AcceptedSamples = () => {
                         <Table
                             columns={columns}
                             data={currentData}
-                            maxHeight="420px"
+                            maxHeight="480px"
                             renderRow={(sample: AcceptedSample) => (
                                 <>
                                     {/* Accession */}
@@ -598,9 +591,11 @@ const AcceptedSamples = () => {
                     {filteredData.length > 0 && (
                         <div className="mt-5 border-t border-slate-100 pt-4">
                             <Pagination
+                                totalItems={filteredData.length}
+                                rowsPerPage={rowsPerPage}
+                                setRowsPerPage={setRowsPerPage}
                                 currentPage={currentPage}
-                                totalPages={totalPages}
-                                onPageChange={setCurrentPage}
+                                setCurrentPage={setCurrentPage}
                             />
                         </div>
                     )}
